@@ -1247,8 +1247,6 @@ BEGIN
 END;
 $$;
 
-
-
 -- audit_log is append-only
 CREATE TRIGGER audit_log_protect_row
     BEFORE UPDATE OR DELETE ON audit_log
