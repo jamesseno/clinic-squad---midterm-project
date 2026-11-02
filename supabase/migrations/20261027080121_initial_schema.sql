@@ -3,18 +3,6 @@
 -- Conceptualized by JEREMIAS C. ESPERANZA - NEU CCS
 -- Information Management Course
 
-DROP TABLE IF EXISTS employee CASCADE;
-DROP TABLE IF EXISTS department CASCADE;
-DROP TABLE IF EXISTS job CASCADE;
-DROP TABLE IF EXISTS jobHistory CASCADE;
-DROP TABLE IF EXISTS customer CASCADE;
-DROP TABLE IF EXISTS sales CASCADE;
-DROP TABLE IF EXISTS salesDetail CASCADE;
-DROP TABLE IF EXISTS product CASCADE;
-DROP TABLE IF EXISTS payment CASCADE;
-DROP TABLE IF EXISTS priceHist CASCADE;
-DROP TABLE IF EXISTS audit_log CASCADE;
-
 -- Create customer table 
 CREATE TABLE employee (empno VARCHAR(5) NOT NULL PRIMARY KEY, 
 												lastname VARCHAR(15),  
@@ -1241,7 +1229,7 @@ BEGIN
                        r.tbl || '_aiu_audit', r.tbl, v_args);
 
         -- view of active (not deleted) rows
-        EXECUTE format('CREATE VIEW %I AS SELECT * FROM %I WHERE NOT is_deleted',
+        EXECUTE format('CREATE VIEW %I WITH (security_invoker = true) AS SELECT * FROM %I WHERE NOT is_deleted',
                        r.tbl || '_active', r.tbl);
     END LOOP;
 END;
@@ -1262,3 +1250,101 @@ CREATE TRIGGER audit_log_protect_truncate
 --   History     : SELECT * FROM audit_log WHERE table_name = 'employee' ORDER BY audit_id;
 --   Active rows : SELECT * FROM employee_active;
 -- =====================================================================
+
+select table_name
+from information_schema.tables
+where table_schema = 'public'
+  and table_type = 'BASE TABLE'
+order by table_name;
+
+select table_name, column_name, data_type, is_nullable
+from information_schema.columns
+where table_schema = 'public'
+order by table_name, ordinal_position;
+
+select tablename, rowsecurity
+from pg_tables
+where schemaname = 'public'
+order by tablename;
+
+select tablename, policyname, roles, cmd, qual, with_check
+from pg_policies
+where schemaname = 'public'
+order by tablename, policyname;
+
+
+select tablename, rowsecurity
+from pg_tables
+where schemaname = 'public'
+order by tablename;
+
+
+
+
+
+create or replace function public.is_super_admin()
+returns boolean
+language sql
+stable
+as $$
+  select coalesce(
+    auth.jwt() -> 'app_metadata' ->> 'role' = 'super_admin',
+    false
+  );
+$$;
+
+do $$
+declare
+  table_name text;
+begin
+  foreach table_name in array array[
+    'audit_log', 'customer', 'department', 'employee', 'job',
+    'jobhistory', 'payment', 'pricehist', 'product', 'sales', 'salesdetail'
+  ]
+  loop
+    execute format(
+      'alter table public.%I enable row level security',
+      table_name
+    );
+    execute format(
+      'grant select, insert, update, delete on public.%I to authenticated',
+      table_name
+    );
+
+    if not exists (
+      select 1
+      from pg_policies
+      where schemaname = 'public'
+        and tablename = table_name
+        and policyname = 'super_admin_all_access'
+    ) then
+      execute format(
+        'create policy super_admin_all_access on public.%I
+         for all to authenticated
+         using (public.is_super_admin())
+         with check (public.is_super_admin())',
+        table_name
+      );
+    end if;
+  end loop;
+end $$;
+
+
+
+
+
+select tablename, rowsecurity
+from pg_tables
+where schemaname = 'public'
+order by tablename;
+
+
+select tablename, policyname, roles, cmd
+from pg_policies
+where schemaname = 'public'
+order by tablename;
+
+
+
+
+
