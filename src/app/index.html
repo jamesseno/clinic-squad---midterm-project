@@ -90,6 +90,19 @@
 		}
 		.brand-name { font-family: var(--serif); font-size: 17px; }
 		.nav-links { display: flex; align-items: center; gap: clamp(16px, 3vw, 36px); }
+		.menu-toggle {
+			display: none;
+			width: 34px;
+			height: 34px;
+			place-items: center;
+			padding: 0;
+			border: 1px solid var(--line);
+			border-radius: 50%;
+			color: var(--sage-deep);
+			background: transparent;
+			cursor: pointer;
+		}
+		.menu-toggle svg { width: 17px; height: 17px; }
 		.nav-links a {
 			color: var(--muted);
 			font-size: 11px;
@@ -132,6 +145,13 @@
 		}
 		.nav-cta:hover { background: var(--plum-deep); }
 		main { overflow: hidden; }
+		.site-page { display: none; }
+		.site-page:not(.is-active) { display: none; }
+		.site-page.is-active { display: block; }
+		.home-only { display: none; }
+		.home-only.is-visible { display: flex; }
+		body:not(.navigation-ready) #home { display: block; }
+		body:not(.navigation-ready) #home-about { display: flex; }
 		.hero {
 			position: relative;
 			display: grid;
@@ -339,6 +359,98 @@
 		.dashboard-person-info strong { display: block; color: var(--plum); font-size: 11px; }
 		.dashboard-person-info span { display: block; margin-top: 4px; color: var(--muted); font-size: 9px; }
 		html.dark .dashboard-photo { background-image: linear-gradient(180deg, rgba(22, 18, 26, .12), rgba(22, 18, 26, .72)), url("https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1200&q=80"); }
+		.wireframe-section { margin: 56px 0 0; }
+		.wireframe-section > .section-heading { margin-top: 0; }
+		.user-list {
+			overflow: hidden;
+			border: 1px solid var(--line);
+			border-radius: 5px;
+			background: var(--surface);
+		}
+		.user-list-toolbar {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 16px;
+			padding: 16px 19px;
+			border-bottom: 1px solid var(--line);
+		}
+		.user-list-toolbar p { margin: 0; color: var(--muted); font-size: 10px; }
+		.wireframe-button {
+			min-height: 34px;
+			padding: 0 13px;
+			border: 1px solid var(--plum);
+			border-radius: 3px;
+			color: #fff;
+			background: var(--plum);
+			cursor: pointer;
+			font-size: 10px;
+			font-weight: 700;
+		}
+		.wireframe-button:hover { background: var(--plum-deep); }
+		.user-table { width: 100%; border-collapse: collapse; text-align: left; }
+		.user-table th {
+			padding: 12px 19px;
+			color: var(--muted);
+			background: color-mix(in srgb, var(--sage-soft) 45%, var(--surface));
+			font-size: 9px;
+			font-weight: 700;
+			letter-spacing: .8px;
+			text-transform: uppercase;
+		}
+		.user-table td { padding: 14px 19px; border-top: 1px solid var(--line); color: var(--muted); font-size: 10px; }
+		.user-table td:first-child { color: var(--ink); font-weight: 600; }
+		.user-name { display: flex; align-items: center; gap: 10px; }
+		.user-avatar {
+			display: grid;
+			width: 30px;
+			height: 30px;
+			place-items: center;
+			border-radius: 50%;
+			color: var(--plum);
+			background: var(--sage-soft);
+			font-family: var(--serif);
+			font-size: 12px;
+		}
+		.user-role { color: var(--sage-deep); font-weight: 700; }
+		.user-status { display: inline-flex; align-items: center; gap: 6px; color: var(--sage-deep); }
+		.user-status::before { width: 6px; height: 6px; border-radius: 50%; background: currentColor; content: ""; }
+		.user-rights-button {
+			padding: 0;
+			border: 0;
+			color: var(--sage-deep);
+			background: transparent;
+			cursor: pointer;
+			font-size: 10px;
+			font-weight: 700;
+		}
+		.user-rights-button:hover { text-decoration: underline; text-underline-offset: 3px; }
+		.rights-dialog {
+			width: min(470px, calc(100% - 32px));
+			padding: 0;
+			border: 1px solid var(--line);
+			border-radius: 5px;
+			color: var(--ink);
+			background: var(--paper);
+			box-shadow: 0 24px 80px rgba(35, 27, 40, .22);
+		}
+		.rights-dialog::backdrop { background: rgba(39, 31, 43, .48); backdrop-filter: blur(3px); }
+		.rights-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 24px; border-bottom: 1px solid var(--line); }
+		.rights-header h2 { margin: 0; color: var(--plum); font-family: var(--serif); font-size: 24px; font-weight: 500; }
+		.rights-close { width: 30px; height: 30px; border: 1px solid var(--line); border-radius: 50%; color: var(--sage-deep); background: var(--surface); cursor: pointer; font-size: 17px; }
+		.rights-body { padding: 22px 24px 24px; }
+		.rights-user { margin: 0 0 18px; color: var(--muted); font-size: 11px; }
+		.rights-user strong { color: var(--ink); }
+		.rights-options { display: grid; gap: 10px; }
+		.rights-option { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 13px; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); }
+		.rights-option > span { display: block; color: var(--ink); font-size: 11px; font-weight: 600; }
+		.rights-option > span > span { display: block; margin-top: 3px; color: var(--muted); font-size: 9px; font-weight: 400; }
+		.rights-option input { width: 16px; height: 16px; accent-color: var(--sage); }
+		.rights-footer { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+		.rights-cancel { min-height: 34px; padding: 0 13px; border: 1px solid var(--line); border-radius: 3px; color: var(--muted); background: transparent; cursor: pointer; font-size: 10px; font-weight: 700; }
+		.rights-save { min-height: 34px; padding: 0 13px; border: 1px solid var(--plum); border-radius: 3px; color: #fff; background: var(--plum); cursor: pointer; font-size: 10px; font-weight: 700; }
+		.rights-save:hover { background: var(--plum-deep); }
+		.wireframe-message { margin: 12px 0 0; color: var(--sage-deep); font-size: 10px; }
 		.section-heading {
 			display: flex;
 			align-items: flex-end;
@@ -627,10 +739,28 @@
 		}
 		@media (max-width: 650px) {
 			.topbar { min-height: 66px; padding: 0 20px; }
-			.nav-links { gap: 13px; }
+			.menu-toggle { display: grid; margin-left: auto; }
+			.nav-links {
+				position: absolute;
+				top: calc(100% + 1px);
+				right: 20px;
+				display: none;
+				width: min(220px, calc(100vw - 40px));
+				flex-direction: column;
+				align-items: stretch;
+				gap: 0;
+				padding: 8px;
+				border: 1px solid var(--line);
+				border-radius: 5px;
+				background: var(--surface);
+				box-shadow: 0 14px 30px rgba(35, 27, 40, .12);
+			}
+			.nav-links.is-open { display: flex; }
+			.nav-links a,
+			.nav-links button { padding: 10px 11px; }
 			.nav-links a { font-size: 10px; }
+			.nav-links .theme-toggle { align-self: flex-start; margin: 4px 11px; }
 			.nav-cta { padding: 9px 10px; }
-			.nav-links .nav-about { display: none; }
 			.hero { min-height: auto; grid-template-columns: 1fr; padding: 53px 24px 36px; }
 			h1 { font-size: clamp(40px, 11vw, 58px); }
 			.hero-art { min-height: 225px; margin-top: 3px; }
@@ -644,6 +774,8 @@
 			.dashboard-people { grid-template-columns: 1fr; }
 			.dashboard-person { display: grid; grid-template-columns: 115px 1fr; align-items: center; }
 			.dashboard-person img { height: 86px; }
+			.user-list { overflow-x: auto; }
+			.user-table { min-width: 610px; }
 			.section-heading { align-items: flex-start; flex-direction: column; margin-top: 34px; }
 			.module-search { width: 100%; }
 			.module-card { min-height: 210px; }
@@ -653,7 +785,6 @@
 		@media (max-width: 430px) {
 			.brand-name { font-size: 15px; }
 			.nav-links { gap: 9px; }
-			.nav-links .nav-dashboard, .nav-links .nav-modules, .nav-links .nav-about, .nav-links .nav-home { display: none; }
 			.nav-cta { padding: 8px 9px; }
 			.theme-toggle { width: 31px; height: 31px; }
 			.auth-header { padding: 16px 18px; }
@@ -673,10 +804,16 @@
 			<span class="brand-mark" aria-hidden="true">H</span>
 			<span class="brand-name">HOPE. inc</span>
 		</a>
+		<button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false">
+			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+				<path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"></path>
+			</svg>
+		</button>
 		<nav class="nav-links" aria-label="Main navigation">
 			<a class="nav-home" href="#home">Home</a>
 			<a class="nav-dashboard" href="#dashboard">Dashboard</a>
-			<a class="nav-modules" href="#modules">Systems</a>
+			<a class="nav-users" href="#users">Users</a>
+			<a class="nav-modules" href="#systems">Systems</a>
 			<a class="nav-about" href="#about">About</a>
 			<button class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode">
 				<svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
@@ -692,14 +829,14 @@
 		</nav>
 	</header>
 
-	<main id="home">
-		<section class="hero" aria-labelledby="hero-title">
+	<main>
+		<section class="hero site-page" id="home" aria-labelledby="hero-title">
 			<div class="hero-copy">
 				<p class="eyebrow">HOPE. inc business workspace</p>
 				<h1 id="hero-title">A clearer way<br>to move forward.</h1>
 				<p>Bring the essential parts of your business together. Explore the tools that help your people, products, customers, and sales work in sync.</p>
 				<div class="hero-actions">
-					<a class="primary-link" href="#modules">Explore the systems <span aria-hidden="true">→</span></a>
+					<a class="primary-link" href="#systems">Explore the systems <span aria-hidden="true">→</span></a>
 					<a class="quiet-link" href="#about">A thoughtful workspace</a>
 				</div>
 			</div>
@@ -722,8 +859,14 @@
 			</div>
 		</section>
 
+		<section class="note home-only" id="home-about" aria-label="About the workspace">
+			<span class="note-mark" aria-hidden="true">H</span>
+			<p><strong>Thoughtfully built for what comes next.</strong><br>HOPE. inc brings your core business systems into one connected workspace.</p>
+			<a class="quiet-link" href="#about">Learn more <span aria-hidden="true">→</span></a>
+		</section>
+
 		<div class="content">
-			<section class="dashboard" id="dashboard" aria-labelledby="dashboard-title">
+			<section class="dashboard site-page" id="dashboard" aria-labelledby="dashboard-title">
 				<div class="dashboard-heading">
 					<div>
 						<p class="eyebrow">A visual overview</p>
@@ -769,7 +912,51 @@
 				</div>
 			</section>
 
-			<section id="modules" aria-labelledby="modules-title">
+			<section class="wireframe-section site-page" id="users" aria-labelledby="users-title">
+				<div class="section-heading">
+					<div>
+						<p class="eyebrow">People & access</p>
+						<h2 id="users-title">User management</h2>
+						<p>Manage workspace members and their rights.</p>
+					</div>
+					<button class="wireframe-button" type="button">+ Add user</button>
+				</div>
+				<div class="user-list">
+					<div class="user-list-toolbar">
+						<p>4 members in this workspace</p>
+						<input class="module-search" type="search" placeholder="Search users..." aria-label="Search users">
+					</div>
+					<table class="user-table">
+						<thead>
+							<tr><th scope="col">Member</th><th scope="col">Role</th><th scope="col">Status</th><th scope="col">Access</th></tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><div class="user-name"><span class="user-avatar">MC</span><span>Maria Chen</span></div></td>
+								<td class="user-role">Administrator</td><td><span class="user-status">Active</span></td>
+								<td><button class="user-rights-button" type="button" data-rights-user="Maria Chen">Edit rights</button></td>
+							</tr>
+							<tr>
+								<td><div class="user-name"><span class="user-avatar">JR</span><span>James Rivera</span></div></td>
+								<td class="user-role">Manager</td><td><span class="user-status">Active</span></td>
+								<td><button class="user-rights-button" type="button" data-rights-user="James Rivera">Edit rights</button></td>
+							</tr>
+							<tr>
+								<td><div class="user-name"><span class="user-avatar">AK</span><span>Aisha Khan</span></div></td>
+								<td class="user-role">Editor</td><td><span class="user-status">Active</span></td>
+								<td><button class="user-rights-button" type="button" data-rights-user="Aisha Khan">Edit rights</button></td>
+							</tr>
+							<tr>
+								<td><div class="user-name"><span class="user-avatar">TN</span><span>Thomas Nguyen</span></div></td>
+								<td class="user-role">Viewer</td><td><span class="user-status">Invited</span></td>
+								<td><button class="user-rights-button" type="button" data-rights-user="Thomas Nguyen">Edit rights</button></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</section>
+
+			<section class="site-page" id="systems" aria-labelledby="modules-title">
 				<div class="section-heading">
 					<div>
 						<p class="eyebrow">One connected workspace</p>
@@ -817,7 +1004,7 @@
 				<p class="module-notice" id="module-notice" role="status" aria-live="polite"></p>
 			</section>
 
-			<section class="note" id="about" aria-label="About the workspace">
+			<section class="note site-page" id="about" aria-label="About the workspace">
 				<span class="note-mark" aria-hidden="true">H</span>
 				<p><strong>Thoughtfully built for what comes next.</strong><br>HOPE. inc brings your core business systems into one connected workspace.</p>
 			</section>
@@ -828,6 +1015,27 @@
 		<span>© <span id="year"></span> HOPE. inc</span>
 		<span><a href="#about">A more thoughtful way forward.</a></span>
 	</footer>
+
+	<dialog class="rights-dialog" id="rights-dialog" aria-labelledby="rights-title">
+		<div class="rights-header">
+			<h2 id="rights-title">Edit rights</h2>
+			<button class="rights-close" type="button" aria-label="Close rights dialog">&times;</button>
+		</div>
+		<div class="rights-body">
+			<p class="rights-user">Set access for <strong id="rights-user-name">this member</strong>.</p>
+			<div class="rights-options">
+				<label class="rights-option"><span><strong>Dashboard</strong><span>View workspace activity and summaries.</span></span><input id="rights-dashboard" type="checkbox" checked></label>
+				<label class="rights-option"><span><strong>User management</strong><span>Invite people and manage workspace access.</span></span><input id="rights-users" type="checkbox"></label>
+				<label class="rights-option"><span><strong>Business systems</strong><span>View and update connected systems.</span></span><input id="rights-systems" type="checkbox" checked></label>
+				<label class="rights-option"><span><strong>Reports & exports</strong><span>Download summaries and performance reports.</span></span><input id="rights-reports" type="checkbox"></label>
+			</div>
+			<p class="wireframe-message" id="rights-message" role="status" aria-live="polite"></p>
+			<div class="rights-footer">
+				<button class="rights-cancel" type="button">Cancel</button>
+				<button class="rights-save" type="button">Save rights</button>
+			</div>
+		</div>
+	</dialog>
 
 	<dialog class="auth-dialog" id="auth-dialog" aria-label="HOPE. inc account access">
 		<div class="auth-header">
@@ -904,6 +1112,30 @@
 	</dialog>
 
 	<script>
+		const menuToggle = document.querySelector('.menu-toggle');
+		const navLinks = document.querySelector('.nav-links');
+		const sitePages = document.querySelectorAll('.site-page');
+		const homeOnlySections = document.querySelectorAll('.home-only');
+		const pageIds = new Set(Array.from(sitePages, (page) => page.id));
+
+		function showPage(pageId) {
+			const activePage = pageIds.has(pageId) ? pageId : 'home';
+			sitePages.forEach((page) => page.classList.toggle('is-active', page.id === activePage));
+			homeOnlySections.forEach((section) => section.classList.toggle('is-visible', activePage === 'home'));
+			navLinks.classList.remove('is-open');
+			menuToggle.setAttribute('aria-expanded', 'false');
+			menuToggle.setAttribute('aria-label', 'Open navigation menu');
+		}
+
+		document.body.classList.add('navigation-ready');
+		menuToggle.addEventListener('click', () => {
+			const isOpen = navLinks.classList.toggle('is-open');
+			menuToggle.setAttribute('aria-expanded', String(isOpen));
+			menuToggle.setAttribute('aria-label', `${isOpen ? 'Close' : 'Open'} navigation menu`);
+		});
+		window.addEventListener('hashchange', () => showPage(window.location.hash.slice(1)));
+		showPage(window.location.hash.slice(1) || 'home');
+
 		const themeToggle = document.querySelector('.theme-toggle');
 		const savedTheme = localStorage.getItem('theme');
 		const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -942,6 +1174,25 @@
 				notice.textContent = `${button.dataset.module} selected. This preview can be connected to the system page.`;
 				notice.classList.add('is-visible');
 			});
+		});
+
+		const rightsDialog = document.getElementById('rights-dialog');
+		const rightsUserName = document.getElementById('rights-user-name');
+		const rightsMessage = document.getElementById('rights-message');
+		document.querySelectorAll('[data-rights-user]').forEach((button) => {
+			button.addEventListener('click', () => {
+				rightsUserName.textContent = button.dataset.rightsUser;
+				rightsMessage.textContent = '';
+				rightsDialog.showModal();
+			});
+		});
+		document.querySelector('.rights-close').addEventListener('click', () => rightsDialog.close());
+		document.querySelector('.rights-cancel').addEventListener('click', () => rightsDialog.close());
+		document.querySelector('.rights-save').addEventListener('click', () => {
+			rightsMessage.textContent = `Rights updated for ${rightsUserName.textContent}.`;
+		});
+		rightsDialog.addEventListener('click', (event) => {
+			if (event.target === rightsDialog) rightsDialog.close();
 		});
 
 		const authDialog = document.getElementById('auth-dialog');
