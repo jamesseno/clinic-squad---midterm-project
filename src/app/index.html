@@ -22,8 +22,23 @@
 			--gold: #b89958;
 			--paper: #fbfbf8;
 			--line: #e5e8e1;
+			--surface: #fff;
 			--serif: 'Playfair Display', Georgia, serif;
 			--sans: 'DM Sans', 'Segoe UI', sans-serif;
+		}
+		html.dark {
+			color-scheme: dark;
+			--ink: #eee9ef;
+			--muted: #b7b3b7;
+			--sage: #9db59f;
+			--sage-deep: #b2c8b3;
+			--sage-soft: #304235;
+			--paper: #17141a;
+			--line: #39343d;
+			--surface: #242027;
+			--plum: #eadcf0;
+			--plum-deep: #d7c2df;
+			--gold: #d7b86f;
 		}
 		*, *::before, *::after { box-sizing: border-box; }
 		html { scroll-behavior: smooth; }
@@ -52,7 +67,7 @@
 			gap: 22px;
 			padding: 0 clamp(22px, 6vw, 88px);
 			border-bottom: 1px solid var(--line);
-			background: rgba(251, 251, 248, .96);
+			background: color-mix(in srgb, var(--paper) 96%, transparent);
 			backdrop-filter: blur(12px);
 		}
 		.brand {
@@ -76,13 +91,34 @@
 		.brand-name { font-family: var(--serif); font-size: 17px; }
 		.nav-links { display: flex; align-items: center; gap: clamp(16px, 3vw, 36px); }
 		.nav-links a {
-			color: #6d756e;
+			color: var(--muted);
 			font-size: 11px;
 			font-weight: 600;
 			text-decoration: none;
 		}
 		.nav-links a:hover { color: var(--plum); }
 		.nav-links .nav-login { color: var(--sage-deep); }
+		.theme-toggle {
+			display: inline-grid;
+			width: 34px;
+			height: 34px;
+			place-items: center;
+			padding: 0;
+			border: 1px solid var(--line);
+			border-radius: 50%;
+			color: var(--sage-deep);
+			background: transparent;
+			cursor: pointer;
+			transition: color 160ms ease, background 160ms ease, border-color 160ms ease;
+		}
+		.theme-toggle:hover {
+			border-color: var(--sage-deep);
+			background: var(--sage-soft);
+		}
+		.theme-toggle svg { width: 17px; height: 17px; }
+		.theme-toggle .sun-icon { display: none; }
+		html.dark .theme-toggle .sun-icon { display: block; }
+		html.dark .theme-toggle .moon-icon { display: none; }
 		.nav-cta {
 			padding: 10px 15px;
 			border: 1px solid var(--plum);
@@ -107,6 +143,11 @@
 			background:
 				radial-gradient(ellipse at 83% 45%, rgba(184, 153, 88, .13), transparent 32%),
 				linear-gradient(115deg, #f6f5f0 0%, #fbfbf8 54%, #f0f3ee 100%);
+		}
+		html.dark .hero {
+			background:
+				radial-gradient(ellipse at 83% 45%, rgba(184, 153, 88, .12), transparent 32%),
+				linear-gradient(115deg, #211c25 0%, #17141a 54%, #1d2921 100%);
 		}
 		.hero-copy { position: relative; z-index: 1; max-width: 600px; }
 		.eyebrow {
@@ -182,8 +223,13 @@
 			box-shadow: 0 18px 46px rgba(57, 43, 69, .09);
 			transform: rotate(-3deg);
 		}
+		html.dark .art-card {
+			border-color: #4a4350;
+			background: rgba(36, 32, 39, .94);
+		}
 		.art-card-top { display: flex; align-items: center; justify-content: space-between; }
 		.art-card-label { color: #818981; font-size: 9px; }
+		html.dark .art-card-label { color: #c4c0c5; }
 		.art-card-mark {
 			display: grid;
 			width: 29px;
@@ -197,6 +243,7 @@
 		.art-card-title { margin: 17px 0 15px; color: var(--plum); font-family: var(--serif); font-size: 19px; }
 		.art-lines { display: grid; gap: 8px; }
 		.art-line { height: 6px; border-radius: 8px; background: #edf0eb; }
+		html.dark .art-line { background: #4a4350; }
 		.art-line:nth-child(1) { width: 90%; }
 		.art-line:nth-child(2) { width: 73%; }
 		.art-line:nth-child(3) { width: 83%; }
@@ -204,6 +251,8 @@
 		.art-tag { width: 53px; height: 19px; border-radius: 10px; background: #f0edf2; }
 		.art-tag:nth-child(2) { background: #f5f0e4; }
 		.art-tag:nth-child(3) { background: var(--sage-soft); }
+		html.dark .art-tag { background: #38313d; }
+		html.dark .art-tag:nth-child(2) { background: #4a3e27; }
 		.hero-stamp {
 			position: absolute;
 			right: -8px;
@@ -245,10 +294,11 @@
 			border: 1px solid var(--line);
 			border-radius: 3px;
 			color: var(--ink);
-			background: #fff;
+			background: var(--surface);
 			font-size: 10px;
 		}
 		.module-search::placeholder { color: #9aa098; }
+		html.dark .module-search::placeholder { color: #aaa5ad; }
 		.module-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
 		.module-card {
 			display: flex;
@@ -257,7 +307,7 @@
 			padding: 20px 18px 18px;
 			border: 1px solid var(--line);
 			border-radius: 4px;
-			background: #fff;
+			background: var(--surface);
 			transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
 		}
 		.module-card:hover {
@@ -278,6 +328,8 @@
 		.module-icon svg { width: 21px; height: 21px; }
 		.module-icon.sage { color: var(--sage-deep); background: var(--sage-soft); }
 		.module-icon.gold { color: #876c38; background: #f5f0e4; }
+		html.dark .module-icon { background: #302936; }
+		html.dark .module-icon.gold { color: #e3c77f; background: #403522; }
 		.module-card h3 {
 			margin: 17px 0 7px;
 			color: var(--plum);
@@ -322,6 +374,10 @@
 			border-left: 3px solid var(--gold);
 			background: #f5f6f1;
 		}
+		html.dark .note {
+			border-color: var(--line);
+			background: #242d26;
+		}
 		.note-mark {
 			display: grid;
 			width: 35px;
@@ -334,7 +390,7 @@
 			font-family: var(--serif);
 			font-size: 16px;
 		}
-		.note p { margin: 0; color: #6f796f; font-size: 11px; line-height: 1.65; }
+		.note p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.65; }
 		.note strong { color: var(--plum); font-weight: 600; }
 		footer {
 			display: flex;
@@ -342,10 +398,10 @@
 			gap: 16px;
 			padding: 19px clamp(22px, 7vw, 100px);
 			border-top: 1px solid var(--line);
-			color: #929a93;
+			color: var(--muted);
 			font-size: 9px;
 		}
-		footer a { color: #737e75; text-decoration: none; }
+		footer a { color: var(--sage-deep); text-decoration: none; }
 		footer a:hover { text-decoration: underline; }
 		.module-notice {
 			display: none;
@@ -358,6 +414,12 @@
 			font-size: 11px;
 		}
 		.module-notice.is-visible { display: block; }
+		html.dark .module-notice,
+		html.dark .auth-message {
+			border-color: #48604d;
+			color: #c3dec5;
+			background: #26372a;
+		}
 		.auth-dialog {
 			width: min(450px, calc(100% - 32px));
 			max-height: min(760px, calc(100% - 32px));
@@ -377,7 +439,7 @@
 			justify-content: space-between;
 			padding: 20px 24px;
 			border-bottom: 1px solid var(--line);
-			background: #fff;
+			background: var(--surface);
 		}
 		.auth-header .brand-mark { width: 34px; height: 34px; font-size: 18px; }
 		.auth-header .brand-name { font-size: 15px; }
@@ -388,13 +450,13 @@
 			place-items: center;
 			border: 1px solid var(--line);
 			border-radius: 50%;
-			color: #68756c;
-			background: #fff;
+			color: var(--sage-deep);
+			background: var(--surface);
 			cursor: pointer;
 			font-size: 18px;
 			line-height: 1;
 		}
-		.auth-close:hover { color: var(--plum); background: #f6f5f2; }
+		.auth-close:hover { color: var(--plum); background: var(--sage-soft); }
 		.auth-panel { padding: 27px 30px 30px; }
 		.auth-panel .eyebrow { margin-bottom: 10px; font-size: 9px; }
 		.auth-panel h2 {
@@ -412,14 +474,14 @@
 			width: 100%;
 			height: 43px;
 			padding: 0 12px;
-			border: 1px solid #dce1da;
+			border: 1px solid var(--line);
 			border-radius: 3px;
 			outline: none;
 			color: var(--ink);
-			background: #fff;
+			background: var(--surface);
 			font-size: 11px;
 		}
-		.auth-field input::placeholder { color: #a1a9a3; }
+		.auth-field input::placeholder { color: #9fa0a4; }
 		.auth-field input:focus { border-color: var(--sage); box-shadow: 0 0 0 3px rgba(82, 107, 92, .12); }
 		.auth-password { position: relative; }
 		.auth-password input { padding-right: 58px; }
@@ -442,7 +504,7 @@
 			justify-content: space-between;
 			gap: 10px;
 			margin: 3px 0 19px;
-			color: #68756c;
+			color: var(--muted);
 			font-size: 10px;
 		}
 		.auth-remember { display: inline-flex; align-items: center; gap: 7px; }
@@ -519,6 +581,7 @@
 			.nav-links { gap: 9px; }
 			.nav-links .nav-modules, .nav-links .nav-about, .nav-links .nav-home { display: none; }
 			.nav-cta { padding: 8px 9px; }
+			.theme-toggle { width: 31px; height: 31px; }
 			.auth-header { padding: 16px 18px; }
 			.auth-panel { padding: 23px 20px 24px; }
 			.module-grid { grid-template-columns: 1fr; }
@@ -540,6 +603,15 @@
 			<a class="nav-home" href="#home">Home</a>
 			<a class="nav-modules" href="#modules">Systems</a>
 			<a class="nav-about" href="#about">About</a>
+			<button class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode">
+				<svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M20.5 15.2A8.5 8.5 0 0 1 8.8 3.5 8.5 8.5 0 1 0 20.5 15.2Z"></path>
+				</svg>
+				<svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+					<circle cx="12" cy="12" r="3.5"></circle>
+					<path stroke-linecap="round" d="M12 2.5v2M12 19.5v2M4.58 4.58 6 6M18 18l1.42 1.42M2.5 12h2M19.5 12h2M4.58 19.42 6 18M18 6l1.42-1.42"></path>
+				</svg>
+			</button>
 			<button class="nav-login auth-open" type="button" data-auth-view="login">Log in</button>
 			<button class="nav-cta auth-open" type="button" data-auth-view="register">Create account <span aria-hidden="true">→</span></button>
 		</nav>
@@ -711,6 +783,20 @@
 	</dialog>
 
 	<script>
+		const themeToggle = document.querySelector('.theme-toggle');
+		const savedTheme = localStorage.getItem('theme');
+		const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+		const initialTheme = savedTheme === 'dark' || (!savedTheme && prefersDark) ? 'dark' : 'light';
+		document.documentElement.classList.toggle('dark', initialTheme === 'dark');
+		themeToggle.setAttribute('aria-label', `Switch to ${initialTheme === 'dark' ? 'light' : 'dark'} mode`);
+		themeToggle.setAttribute('title', `Switch to ${initialTheme === 'dark' ? 'light' : 'dark'} mode`);
+		themeToggle.addEventListener('click', () => {
+			const isDark = document.documentElement.classList.toggle('dark');
+			localStorage.setItem('theme', isDark ? 'dark' : 'light');
+			themeToggle.setAttribute('aria-label', `Switch to ${isDark ? 'light' : 'dark'} mode`);
+			themeToggle.setAttribute('title', `Switch to ${isDark ? 'light' : 'dark'} mode`);
+		});
+
 		document.getElementById('year').textContent = new Date().getFullYear();
 
 		const search = document.getElementById('module-search');
